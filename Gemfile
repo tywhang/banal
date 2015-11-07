@@ -17,5 +17,8 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails'
+
+  # generate fake data in ex. seeds
+  gem 'faker', github: 'stympy/faker' # need HEAD for Book.genre
 end
 

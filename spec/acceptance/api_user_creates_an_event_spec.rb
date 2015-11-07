@@ -19,7 +19,7 @@ describe 'An API user' do
           'ACCEPT'       => 'application/json' }
     end
 
-    it 'succeeds with status 200' do
+    it 'succeeds with status 201' do
       create_event
       expect(response.status).to equal(201)
     end

@@ -5,3 +5,62 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+module Seed
+  Person      = Struct.new(:name, :id, :books, :lists)
+  Book        = Struct.new(:name, :id)
+  ReadingList = Struct.new(:name, :id, :person_id)
+
+  def self.create_world
+    @people = 5.times.map do |i|
+      Person.new(
+        Faker::Name.name, i,
+        5.times.map {|j| Book.new(Faker::Book.title, j) },
+        5.times.map {|j| ReadingList.new(Faker::Book.genre, j, i) }
+      )
+    end
+    @books_added = Array.new
+  end
+
+  def self.someone_adds_a_book_to_a_list
+    actor = @people.sample
+    book = (actor.books - @books_added).sample
+    list = actor.lists.sample
+
+    @actions = Event.create!(
+      actor: actor.to_json,
+      verb: :add,
+      object: book.to_json,
+      target: list.to_json
+    )
+
+    @books_added << book
+  end
+
+  def self.someone_likes_a_book_in_someones_list
+    actor  = @people.sample
+    book   = actor.books.find {|b| @books_added.include?(b)}
+    target = (@people - [actor]).sample
+
+    @actions = Event.create!(
+      actor: actor.to_json,
+      verb: :like,
+      object: book.to_json,
+      target: target.to_json
+    )
+  end
+end
+
+Seed.create_world
+
+5.times do
+  Seed.someone_adds_a_book_to_a_list
+end
+
+20.times do
+  if rand(2) == 0
+    Seed.someone_adds_a_book_to_a_list
+  else
+    Seed.someone_likes_a_book_in_someones_list
+  end
+end
