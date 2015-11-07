@@ -11,6 +11,12 @@ module Seed
   Book        = Struct.new(:name, :id)
   ReadingList = Struct.new(:name, :id, :person_id)
 
+  class Person
+    def to_json
+      {name: name, id: id}.to_json
+    end
+  end
+
   def self.create_world
     @people = 5.times.map do |i|
       Person.new(
