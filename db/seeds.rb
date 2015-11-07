@@ -20,14 +20,18 @@ module Seed
       )
     end
     @books_added = Array.new
+    @all_books = @people.map(&:books).flatten
   end
 
   def self.someone_adds_a_book_to_a_list
-    actor = @people.sample
-    book = (actor.books - @books_added).sample
+    book = nil
+    while book.nil? && @books_added.size != @all_books.size
+      actor = @people.sample
+      book = (actor.books - @books_added).sample
+    end
     list = actor.lists.sample
 
-    @actions = Event.create!(
+    Event.create!(
       actor: actor.to_json,
       verb: :add,
       object: book.to_json,
@@ -42,7 +46,7 @@ module Seed
     book   = actor.books.find {|b| @books_added.include?(b)}
     target = (@people - [actor]).sample
 
-    @actions = Event.create!(
+    Event.create!(
       actor: actor.to_json,
       verb: :like,
       object: book.to_json,
@@ -64,3 +68,5 @@ end
     Seed.someone_likes_a_book_in_someones_list
   end
 end
+
+puts "Added 25 events to the database"
