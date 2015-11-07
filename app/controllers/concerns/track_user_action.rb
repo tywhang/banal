@@ -22,7 +22,7 @@ module TrackUserAction
 
   def current_actor
     {
-      name: 'Anonymous',
+      name: current_user ? current_user.name : 'Anonymous',
       id: encoded_session_id
     }
   end
