@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107041650) do
+ActiveRecord::Schema.define(version: 20151107174324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20151107041650) do
     t.json     "target"
     t.datetime "created_at", null: false
   end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "token",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["token"], name: "index_projects_on_token", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",              default: "", null: false
