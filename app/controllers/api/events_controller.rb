@@ -12,7 +12,12 @@ module Api
     private
 
     def create_params
-      params.permit(:actor, :verb, :object, :target)
+      params.permit([
+        {actor: [:id, :name]},
+        :verb,
+        {object: [:id, :name]},
+        {target: [:id, :name]}
+      ])
     end
   end
 end
