@@ -18,7 +18,7 @@ module Seed
   end
 
   def self.project
-    @project ||= Project.create!(name: Faker::Company.name)
+    @project ||= Project.create!(name: Project::DEMO_NAME)
   end
 
   def self.create_world
