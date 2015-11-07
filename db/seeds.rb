@@ -55,8 +55,13 @@ module Seed
   end
 
   def self.someone_likes_a_book_in_someones_list
-    actor  = @people.sample
-    book   = actor.books.find {|b| @books_added.include?(b)}
+    book = nil
+    while book.nil? && @books_added.size != @all_books.size
+      actor  = @people.sample
+      book   = actor.books.find {|b| @books_added.include?(b)}
+    end
+    return if book.nil?
+
     target = (@people - [actor]).sample
 
     Event.create!(
