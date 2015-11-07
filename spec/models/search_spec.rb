@@ -20,7 +20,7 @@ describe Search do
     end
 
     it 'filters target by name' do
-      expect(search_for(q: "name:'Favorites'")).to eq([tom, mark, jenny, patty])
+      expect(search_for(q: "name:'Favorites'").sort).to eq([tom, mark, jenny, patty].sort)
     end
   end
 
