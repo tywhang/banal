@@ -4,6 +4,7 @@ Rails.application.routes.draw do
                sign_out: 'logout',
                registration: 'register'
              }
+  get 'logout', to: 'devise/sessions#destroy'
 
   root 'pages#index'
 

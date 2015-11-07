@@ -18,5 +18,5 @@ Devise.setup do |config|
   config.reset_password_within = 6.hours
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = [:delete, :get]
 end
