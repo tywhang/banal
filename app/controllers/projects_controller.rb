@@ -1,8 +1,18 @@
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
   def show
-    @project = current_user.projects.find(params[:id])
+    if !user_signed_in?
+      if params[:id].to_i == Project.demo.id
+        @project = Project.demo
+      else
+        redirect_to new_user_session_path
+        return
+      end
+    else
+      @project = current_user.projects.find(params[:id])
+    end
+
     @events = @project.events.order("created_at DESC").first(50)
   end
 
