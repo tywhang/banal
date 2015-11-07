@@ -1,5 +1,5 @@
 module Api
-  class EventsController < ActionController::API
+  class EventsController < ApplicationController
     def create
       event = Event.new(create_params)
       if event.save
