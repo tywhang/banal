@@ -5,7 +5,9 @@ Rails.application.routes.draw do
                registration: 'register'
              }
 
-  root 'events#index'
+  root 'pages#index'
+
+  get '/events', to: 'events#index'
 
   namespace 'api' do
     put :events, to: 'events#create'

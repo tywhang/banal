@@ -1,0 +1,65 @@
+.video-container
+  position: relative
+  height: 80vh
+  min-height: 40rem
+  max-height: 70rem
+  overflow: hidden
+
+  video
+    position: absolute
+    top: -9999px
+    bottom: -9999px
+    left: -9999px
+    right: -9999px
+    min-width: 100%
+    min-height: 100%
+    width: auto
+    height: auto
+    background-size: cover
+    margin: auto
+
+  &:before
+    content: ""
+    display: block
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    background: black
+    opacity: 0.3
+    z-index: 1
+
+  video::-webkit-media-controls
+    display: none
+
+  .hero-text
+    position: absolute
+    display: flex
+    flex-direction: column
+    width: 100%
+    color: white
+    align-items: center
+    top: 40%
+    z-index: 2
+
+    h1
+      font-size: 160px
+      font-weight: 100
+      margin: 0
+
+    h2
+      font-size: 48px
+      font-weight: 100
+      margin: 0
+
+.problems-container
+  height: 50rem
+
+.solutions-container
+  height: 50rem
+  background-color: blue
+
+.demo-container
+  height: 30rem
+  background-color: yellow
