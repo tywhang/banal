@@ -1,18 +1,26 @@
 require 'rails_helper'
 
 describe Search do
-  let(:tom)   { create_event('Tom',   :post, Faker::Book.name, 'Favorites') }
-  let(:mark)  { create_event('Mark',  :post, Faker::Book.name, 'Favorites') }
-  let(:jenny) { create_event('Jenny', :post, Faker::Book.name, 'Favorites') }
-  let(:patty) { create_event('Patty', :post, Faker::Book.name, 'Favorites') }
+  let(:tom)   { create_event('Tom',   :post, "The Great Gatsby", 'Favorites') }
+  let(:mark)  { create_event('Mark',  :post, "Game of Thrones", 'Favorites') }
+  let(:jenny) { create_event('Jenny', :post, "Goodnight Moon", 'Favorites') }
+  let(:patty) { create_event('Patty', :post, "Golf for Dummies", 'Favorites') }
 
   before do
     tom; mark; jenny; patty
   end
 
   context 'free text search' do
-    it 'filters by name' do
+    it 'filters actor by name' do
       expect(search_for(q: "name:'Tom'")).to eq([tom])
+    end
+
+    it 'filters object by name' do
+      expect(search_for(q: "name:'Game of Thrones'")).to eq([mark])
+    end
+
+    it 'filters target by name' do
+      expect(search_for(q: "name:'Favorites'")).to eq([tom, mark, jenny, patty])
     end
   end
 

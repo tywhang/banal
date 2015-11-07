@@ -1,6 +1,8 @@
 class Search
   include ActiveModel::Model
 
+  JSON_EVENT_FIELDS = [ 'actor', 'object', 'target' ]
+
   attr_reader :q, :name, :scope
 
   ### Main API
@@ -24,7 +26,12 @@ class Search
 
   def name=(name)
     @name = name
-    @scope = @scope.where(%(actor @> '{"name":"#{name}"}'))
+    search_string = ""
+    JSON_EVENT_FIELDS.each do |field|
+      search_string += " OR " unless search_string.blank?
+      search_string += %(#{field} @> '{"name":"#{name}"}')
+    end
+    @scope = @scope.where(search_string)
   end
 
   def attributes=(attrs)
