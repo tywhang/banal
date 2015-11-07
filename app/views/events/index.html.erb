@@ -19,7 +19,7 @@
         <td><%= event.actor["name"] %></td>
         <td><%= event.verb %></td>
         <td><%= event.object["name"] %></td>
-        <td><%= event.target["name"] %></td>
+        <td><%= event.target && event.target["name"] %></td>
       </tr>
       <% end %>
     </tbody>

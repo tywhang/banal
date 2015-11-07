@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  DEMO_NAME = 'Demo Project'
+
   has_many :memberships
   has_many :users, through: :memberships
 
@@ -6,6 +8,16 @@ class Project < ActiveRecord::Base
   validates :token, presence: true, length: { minimum: 32 }, uniqueness: true
 
   before_validation :set_token_on_create
+
+  def track_event(actor, verb, object, target = nil)
+    Event.create!(
+      project: self,
+      actor: actor,
+      verb: verb,
+      object: object,
+      target: target
+    )
+  end
 
   private
 
