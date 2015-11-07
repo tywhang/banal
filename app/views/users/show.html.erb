@@ -1,0 +1,12 @@
+<h3>Welcome, <%= @user.name %></h3>
+
+<h5>Your projects:</h5>
+<ul>
+  <% @user.projects.each do |project| %>
+  <li>
+    <a href="<%= project_path(project) %>">
+      <%= project.name %>
+    </a>
+  </li>
+  <% end %>
+</ul>

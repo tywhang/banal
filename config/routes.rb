@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
-  get '/events', to: 'events#index'
+  get 'home', to: 'users#show'
+  resources :projects, only: [:show]
 
   namespace 'api' do
     put :events, to: 'events#create'

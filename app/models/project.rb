@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
 
   has_many :memberships
   has_many :users, through: :memberships
+  has_many :events
 
   validates :name, presence: true
   validates :token, presence: true, length: { minimum: 32 }, uniqueness: true
