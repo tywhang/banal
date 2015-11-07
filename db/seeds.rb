@@ -29,6 +29,8 @@ module Seed
       actor = @people.sample
       book = (actor.books - @books_added).sample
     end
+    return if book.nil?
+
     list = actor.lists.sample
 
     Event.create!(
