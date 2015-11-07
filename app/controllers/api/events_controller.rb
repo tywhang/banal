@@ -16,12 +16,13 @@ module Api
     private
 
     def create_params
-      params.permit([
-        {actor: [:id, :name]},
-        :verb,
-        {object: [:id, :name]},
-        {target: [:id, :name]}
-      ]).merge(project_id: current_project.id)
+      {
+        actor: JSON.parse(params[:actor]),
+        verb: params[:verb],
+        object: JSON.parse(params[:object]),
+        target: params[:target] && JSON.parse(params[:target]),
+        project_id: current_project.id
+      }
     end
 
     def current_project
