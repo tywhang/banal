@@ -15,6 +15,7 @@ module Seed
     def to_json
       {name: name, id: id}.to_json
     end
+  end
 
   def self.project
     @project ||= Project.create!(name: Faker::Company.name)
