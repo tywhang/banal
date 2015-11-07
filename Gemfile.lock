@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/woahdae/activity_stream.git
+  revision: dead95e1402474ff3eef95ed53df13e7ddee2896
+  specs:
+    activity_stream (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -148,6 +154,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activity_stream!
   byebug
   jbuilder (~> 2.0)
   jquery-rails
