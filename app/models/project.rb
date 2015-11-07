@@ -10,6 +10,10 @@ class Project < ActiveRecord::Base
 
   before_validation :set_token_on_create
 
+  def self.demo
+    Project.find_by!(name: DEMO_NAME)
+  end
+
   def track_event(actor, verb, object, target = nil)
     Event.create!(
       project: self,

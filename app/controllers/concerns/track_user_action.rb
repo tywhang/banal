@@ -9,15 +9,11 @@ module TrackUserAction
     # We only track normal requests
     return if request.xhr? || !request.format.html?
 
-    demo_project.track_event(
+    Project.demo.track_event(
       current_actor,
       :visit,
       page_description
     )
-  end
-
-  def demo_project
-    @demo_project ||= Project.find_by!(name: Project::DEMO_NAME)
   end
 
   def current_actor
