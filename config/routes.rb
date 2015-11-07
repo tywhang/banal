@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   get 'home', to: 'users#show'
-  resources :projects, only: [:show]
+  resources :projects, only: [:show, :new, :create]
 
   namespace 'api' do
     put :events, to: 'events#create'
