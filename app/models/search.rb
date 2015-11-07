@@ -3,12 +3,15 @@ class Search
 
   JSON_EVENT_FIELDS = [ 'actor', 'object', 'target' ]
 
+  attr_accessor :project
   attr_reader :q, :name, :scope
 
   ### Main API
 
   def initialize_with_scope(attrs)
-    @scope = Event.all
+    @scope =
+      (attrs[:project].try(:events) || Event.all).
+      order("created_at DESC").limit(50)
     initialize_without_scope(attrs)
   end
   alias_method_chain :initialize, :scope
@@ -21,6 +24,8 @@ class Search
 
   def q=(string_query)
     @q = string_query
+    return if string_query.blank?
+
     self.attributes = StringParser.new(string_query).to_attrs
   end
 

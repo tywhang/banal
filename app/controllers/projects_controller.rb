@@ -13,7 +13,8 @@ class ProjectsController < ApplicationController
       @project = current_user.projects.find(params[:id])
     end
 
-    @events = @project.events.order("created_at DESC").first(50)
+    @project = Project.find(params[:id])
+    @search = Search.new((params.slice(:q) || {}).merge(project: @project))
   end
 
   def new
