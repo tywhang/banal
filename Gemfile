@@ -25,3 +25,4 @@ group :development, :test do
   gem 'faker', github: 'stympy/faker' # need HEAD for Book.genre
 end
 
+gem 'rails_12factor', group: :production
