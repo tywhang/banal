@@ -1,5 +1,9 @@
 module Api
   class EventsController < ApplicationController
+    rescue_from 'ActiveRecord::RecordNotFound' do |exception|
+      render status: :not_found, json: {}
+    end
+
     def create
       event = Event.new(create_params)
       if event.save
@@ -17,7 +21,11 @@ module Api
         :verb,
         {object: [:id, :name]},
         {target: [:id, :name]}
-      ])
+      ]).merge(project_id: current_project.id)
+    end
+
+    def current_project
+      Project.find_by!(token: request.headers['X-AUTHTOKEN'])
     end
   end
 end

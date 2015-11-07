@@ -15,6 +15,9 @@ module Seed
     def to_json
       {name: name, id: id}.to_json
     end
+
+  def self.project
+    @project ||= Project.create!(name: Faker::Company.name)
   end
 
   def self.create_world
@@ -43,7 +46,8 @@ module Seed
       actor: actor.to_json,
       verb: :add,
       object: book.to_json,
-      target: list.to_json
+      target: list.to_json,
+      project: project
     )
 
     @books_added << book
@@ -58,7 +62,8 @@ module Seed
       actor: actor.to_json,
       verb: :like,
       object: book.to_json,
-      target: target.to_json
+      target: target.to_json,
+      project: project
     )
   end
 end

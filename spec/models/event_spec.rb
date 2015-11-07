@@ -5,7 +5,8 @@ describe Event do
     let(:created_event) do
       Event.create!(actor: { name: 'joe' },
                     verb: 'build',
-                    object: { name: 'house' })
+                    object: { name: 'house' },
+                    project: Project.create!(name: 'test'))
     end
 
     it 'is false for new records' do

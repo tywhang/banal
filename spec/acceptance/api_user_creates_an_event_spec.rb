@@ -4,6 +4,7 @@ describe 'An API user' do
   include RSpec::Rails::RequestExampleGroup
 
   describe 'creating an event' do
+    let(:project) { Project.create!(name: Faker::Company.name) }
     let(:attrs) do
       {
         'actor'  => { 'name' => 'tom' },
@@ -16,7 +17,8 @@ describe 'An API user' do
       put '/api/events',
         attrs.to_json,
         { 'CONTENT_TYPE' => 'application/json',
-          'ACCEPT'       => 'application/json' }
+          'ACCEPT'       => 'application/json',
+          'X-AUTHTOKEN'  => project.token }
     end
 
     it 'succeeds with status 201' do
