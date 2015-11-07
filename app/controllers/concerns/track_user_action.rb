@@ -6,6 +6,9 @@ module TrackUserAction
   end
 
   def track_page_visit
+    # We only track normal requests
+    return if request.xhr? || !request.format.html?
+
     demo_project.track_event(
       current_actor,
       :visit,
