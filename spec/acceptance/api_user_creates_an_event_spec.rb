@@ -7,9 +7,9 @@ describe 'An API user' do
     let(:project) { Project.create!(name: Faker::Company.name) }
     let(:attrs) do
       {
-        'actor'  => { 'name' => 'tom' },
+        'actor'  => '{ "name": "tom" }',
         'verb'   => 'buy',
-        'object' => { 'name' => 'stuff' }
+        'object' => '{ "name": "stuff" }'
       }
     end
 
@@ -29,7 +29,9 @@ describe 'An API user' do
     it 'creates a new event' do
       expect { create_event }.to change { Event.count }.by(1)
       event = Event.last
-      expect(event).to have_attributes(attrs)
+      expect(event.actor).to eql({ "name" => "tom" })
+      expect(event.verb).to eql('buy')
+      expect(event.object).to eql({ "name" => "stuff" })
     end
   end
 end
