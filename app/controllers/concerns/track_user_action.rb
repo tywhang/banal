@@ -2,7 +2,7 @@ module TrackUserAction
   extend ActiveSupport::Concern
 
   included do
-    before_filter :track_page_visit
+    after_filter :track_page_visit
   end
 
   def track_page_visit
