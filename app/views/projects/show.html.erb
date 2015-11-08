@@ -1,6 +1,6 @@
 <div class="events-outer-container background">
   <div class="panel panel-default events-container">
-    <div class="panel-heading">List of Recent Events for <%= @project.name %></div>
+    <div class="panel-heading"><h4>Recent Events for: <%= @project.name %></h4></div>
 
     <div class="panel-body">
       <div id="event-viewport">
@@ -17,10 +17,9 @@
             <% @search.results.each do |event| %>
             <tr>
               <td>
-                <p>
-                  <%= event.created_at.strftime("%_m/%d/%Y") %>
-                </p>
-                <p><%= event.created_at.strftime("%l:%M:%S %p (%Z)") %></p></td>
+                <p><%= event.created_at.strftime("%_m/%d/%Y") %></p>
+                <p><%= event.created_at.strftime("%l:%M:%S %p (%Z)") %></p>
+              </td>
               <td><%= event.actor["name"] %></td>
               <td><%= event.verb %></td>
               <td><%= event.object["name"] %></td>
@@ -42,7 +41,6 @@
             <%= f.text_field :q, name: 'q', class: 'form-control', placeholder: 'name="Billy Joel"' %>
           </div>
         <% end %>
-
       </div>
     </div>
   </div>

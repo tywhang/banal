@@ -49,7 +49,7 @@
   </div>
 </div>
 <div class="solutions-container row">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-8 col-sm-offset-2">
     <div class="header-text-container">
       <h2>How does BANAL solve this issue?</h2>
       <img src="<%= image_url('cat.png') %>" alt="" class="icon">
@@ -58,23 +58,101 @@
     <div class="col-sm-4 feature">
       <img class="icon" src="<%= image_url('stream.png') %>" alt"">
       <div class="text-container">
-        <h3>Uses Activity Stream Specification</h3>
+        <h4>Uses Activity Stream Specification</h4>
       </div>
     </div>
     <div class="col-sm-4 feature">
       <img class="icon" src="<%= image_url('check.png') %>" alt"">
       <div class="text-container">
-        <h3>Easy to use API</h3>
+        <h4>Easy to use API</h4>
       </div>
     </div>
     <div class="col-sm-4 feature">
       <img class="icon" src="<%= image_url('chart.png') %>" alt"">
       <div class="text-container">
-        <h3>Detailed charts</h3>
+        <h4>Detailed tables for segmentation</h4>
       </div>
     </div>
   </div>
 </div>
 <div id="demo" class="demo-container row">
-  <h2>How it works</h2>
+  <div class="demo-inner-container">
+    <div class="demo-header">
+      <h2>How it works</h2>
+      <img src="<%= image_url('gears.png') %>" alt="" class="icon">
+    </div>
+    <div class="demo-step">
+      <h3>BANAL makes use of the ActivityStream Spec.</h3>
+      <div class="demo-step-description">
+        <h5>A data collection spec used at companies like Facebook, Myspace, and the BBC.</h5>
+        <h5>You can find its documentation <a href="http://www.w3.org/wiki/Activity_Streams">here</a></h5>
+      </div>
+    </div>
+    <div class="demo-step">
+      <h3>In summary the spec structure is: </h3>
+      <div class="demo-step-description">
+        <h4><code>[Actor] [verbs] an [object], sometimes to a [TARGET]</code></h4>
+        <h5>Ex: [Bobby] [uploaded] ['Foo.jpg'] to his [profile]</h5>
+        <h5>Ex: [JSuzie] [deleted] ['The Way of the Gun']</h5>
+      </div>
+    </div>
+    <div class="demo-step">
+      <h3>Using this spec, you make calls to our API</h3>
+      <div class="demo-step-description">
+        <h5>So when Bobby uploads 'Foo.jpg' to his profile, you would run:</h5>
+        <div class="code-snippet">
+          <code>$.post(</code><br />
+          <code>&nbsp;&nbsp;url: "http://simple-track.r15.railsrumble.com/events",</code><br />
+          <code>&nbsp;&nbsp;data: {</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;actor: "Bobby",</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;verb: "uploaded",</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;object: "Foo.jpg",</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;target: "profile",</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;project_id: { your project's unique ID }</code><br />
+          <code>&nbsp;&nbsp;}</code><br />
+          <code>)</code><br />
+        </div>
+      </div>
+    </div>
+    <div class="demo-step">
+      <h3>Then log in to see your data!</h3>
+      <table class="table">
+        <thead>
+          <th>Time</th>
+          <th>Actor</th>
+          <th>Verb</th>
+          <th>Object</th>
+          <th>Target</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              <p><%= Time.now.strftime("%_m/%d/%Y") %></p>
+              <p><%= Time.now.strftime("%l:%M:%S %p (%Z)") %></p>
+            </td>
+            <td>Bobby</td>
+            <td>uploaded</td>
+            <td>Foo.jpg</td>
+            <td>Profile</td>
+          </tr>
+          <tr>
+            <td>
+              <p><%= Time.now.strftime("%_m/%d/%Y") %></p>
+              <p><%= Time.now.strftime("%l:%M:%S %p (%Z)") %></p>
+            </td>
+            <td>JSuzie</td>
+            <td>deleted</td>
+            <td>The Way of the Gun</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>And query your data!</h3>
+      <input type="text" class="form-control" placeholder='name="Billy Joel"'>
+    </div>
+    <div class="icon-container">
+      <img src="<%= image_url('standing_cat.png') %>" alt="" class="icon">
+    </div>
+  </div>
 </div>
