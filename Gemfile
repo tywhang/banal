@@ -29,4 +29,7 @@ group :test do
   gem 'rspec-activemodel-mocks'
 end
 
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
+
 gem 'rails_12factor', group: :production

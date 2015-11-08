@@ -3,80 +3,33 @@ class Search
 
   JSON_EVENT_FIELDS = [ 'actor', 'object', 'target' ]
 
-  attr_accessor :project
-  attr_reader :q, :scope
+  attr_accessor :project, :q
+  attr_reader :parsed_q
 
   ### Main API
 
-  def initialize_with_scope(attrs)
-    @scope =
-      (attrs[:project].try(:events) || Event.all).order("created_at DESC")
-    initialize_without_scope(attrs)
-  end
-  alias_method_chain :initialize, :scope
-
   def results
-    @scope
+    Event.search(full_query).records
+  end
+
+  def full_query
+    {}.tap do |query|
+      if q.present?
+        query.merge!(query: {query_string: {query: q}})
+      else
+        query.merge!(query: {match_all: {}})
+      end
+
+      if project.present?
+        query.merge!(filter: {term: {project_id: project.id}})
+      end
+    end
   end
 
   ### Attributes
 
   def q=(string_query)
     @q = string_query
-    return if @q.blank?
-
-    generated_query = ''
-    tokens = StringParser.new(string_query).parsed_string
-    tokens.each do |token|
-      append_to_query(generated_query, token)
-    end
-
-    @scope = @scope.where(generated_query)
-  end
-
-  private
-
-  def append_to_query(generated_query, token)
-    if token == :or
-      generated_query << ' OR '
-    elsif token == :and
-      generated_query << ' AND '
-
-    # This looks dangerous but we know token is an array at this point
-    # because the string parser would have raised an error otherwise
-    elsif token.first == :group
-      token.shift
-      generated_query << '('
-      token.each{ |sub_token| append_to_query(generated_query, sub_token) }
-      generated_query << ')'
-
-    elsif token.first == :equality
-      token.shift
-
-      fields = token.shift.split('.')
-      if fields.length == 1
-        columns = JSON_EVENT_FIELDS
-      elsif fields.first == '*'
-        fields.shift
-        columns = JSON_EVENT_FIELDS
-      else
-        maybe_column = fields.shift
-        if JSON_EVENT_FIELDS.include?(maybe_column)
-          columns = [maybe_column]
-        else
-          columns = JSON_EVENT_FIELDS
-        end
-      end
-
-      value = token.shift
-      column_idx = 0
-      while column_idx < columns.length
-        column_name = columns[column_idx]
-        generated_query <<
-          " #{column_name} #> '{#{fields.join(',')}}' = '\"#{value}\"'"
-        column_idx += 1
-        generated_query << ' OR ' if column_idx < columns.length
-      end
-    end
+    @parsed_q = string_query.present? ? string_query : '*'
   end
 end

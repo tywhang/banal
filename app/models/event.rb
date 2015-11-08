@@ -1,4 +1,7 @@
 class Event < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   belongs_to :project
 
   validates :actor, presence: true
