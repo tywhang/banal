@@ -13,10 +13,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if current_user.nil? %>
-          <li><a class="js-navigation-link" data-target="#works">How it works</a></li>
-          <li><a class="js-navigation-link" data-target="#quick-start">Quick Start</a></li>
-          <li><a class="js-navigation-link" data-target="#demo">Demo</a></li>
-          <li><a href="/login">Login/Sign Up</a></li>
+          <% if request.path == '/' %>
+            <li><a class="js-navigation-link" data-target="#works">How it works</a></li>
+            <li><a class="js-navigation-link" data-target="#quick-start">Quick Start</a></li>
+            <li><a class="js-navigation-link" data-target="#demo">Demo</a></li>
+            <li><a href="/login">Login/Sign Up</a></li>
+          <% else %>
+            <li><a class="js-navigation-link" href="/#works">How it works</a></li>
+            <li><a class="js-navigation-link" href="/#quick-start">Quick Start</a></li>
+            <li><a class="js-navigation-link" href="/#demo">Demo</a></li>
+            <li><a href="/login">Login/Sign Up</a></li>
+          <% end %>
         <% else %>
           <li><a href="/home">Your Dashboard</a></li>
           <li><a href="/logout">Logout</a></li>
