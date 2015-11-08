@@ -4,7 +4,7 @@ class Search
   JSON_EVENT_FIELDS = [ 'actor', 'object', 'target' ]
 
   attr_accessor :project
-  attr_reader :q, :name, :scope
+  attr_reader :q, :scope
 
   ### Main API
 
@@ -23,7 +23,7 @@ class Search
 
   def q=(string_query)
     @q = string_query
-    return if @q.nil?
+    return if @q.blank?
 
     generated_query = ''
     tokens = StringParser.new(string_query).parsed_string
