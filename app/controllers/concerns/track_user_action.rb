@@ -26,7 +26,8 @@ module TrackUserAction
   def page_description
     {
       name: request.url,
-      id: request.path
+      id: request.path,
+      method: request.method
     }
   end
 
