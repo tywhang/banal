@@ -22,6 +22,9 @@ class Search
   ### Attributes
 
   def q=(string_query)
+    @q = string_query
+    return if @q.nil?
+
     generated_query = ''
     tokens = StringParser.new(string_query).parsed_string
     tokens.each do |token|
