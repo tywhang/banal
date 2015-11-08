@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   constraints subdomain: 'api' do
     put :events, to: 'events#create'
   end
+
+  resources :faker, only: [:new, :create]
 end

@@ -4,11 +4,16 @@
       <img src="<%= image_url('cog.png') %>" alt="" class="icon">
     </button>
 
+    <span class="faker-link">
+      <span class="divider">|</span>
+      <a href="#" data-toggle="modal" data-target="#fakerModal">Make fake events</a>
+    </span>
+
     <div class="panel-heading"><h4>Recent Events for: <%= @project.name %></h4></div>
 
     <div class="panel-body">
       <div id="event-viewport">
-        <table class="table table-hover events-table">
+        <table class="table table-striped table-hover events-table">
           <thead>
             <th>Time</th>
             <th>Actor</th>
@@ -21,8 +26,7 @@
             <% @search.results.each do |event| %>
             <tr class="json-row">
               <td>
-                <p><%= event.created_at.strftime("%_m/%d/%Y") %></p>
-                <p><%= event.created_at.strftime("%l:%M:%S %p (%Z)") %></p>
+                <p><%= time_ago_in_words(event.created_at) %> ago</p>
               </td>
               <td class="json-row">
                 <span class="summary"><%= event.actor["name"] %></span>
@@ -88,7 +92,6 @@
   </div>
 </div>
 
-
 <!-- Help Modal -->
 <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -148,3 +151,6 @@
     </div>
   </div>
 </div>
+
+<% @event = @project.events.build %>
+<%= render template: 'faker/new' %>

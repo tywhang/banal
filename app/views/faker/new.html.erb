@@ -1,0 +1,83 @@
+<% current_user_name = current_user.try(:name) || 'Anonymous' %>
+<div class="modal fade" id="fakerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Important Decisions</h4>
+
+            </div>
+            <div class="modal-body">
+
+
+              <h3>Like your favorite troll device</h3>
+
+              <div class="row">
+                <div class="col-xs-12">
+                <div style="display: inline-block">
+                  <%= form_for @event, url: faker_index_path(project_id: @project.id) do |f| %>
+                    <input type="hidden" name="event[actor][name]" value="<%= current_user_name %>" />
+                    <input type="hidden" name="event[verb]" value="like" />
+                    <input type="hidden" name="event[object][name]" value="Never Gonna Give You Up" />
+                    <button class="btn btn-primary">Never Gonna Give You Up</button>
+                  <% end %>
+                </div>
+
+                <div style="display: inline-block">
+                  <%= form_for @event, url: faker_index_path(project_id: @project.id) do |f| %>
+                    <input type="hidden" name="event[actor][name]" value="<%= current_user_name %>" />
+                    <input type="hidden" name="event[verb]" value="like" />
+                    <input type="hidden" name="event[object][name]" value="Let Me Google That For You" />
+                    <button class="btn btn-primary">Let Me Google That For You</button>
+                  <% end %>
+                </div>
+                </div>
+              </div>
+
+              <h3>Add a cat to your favorites</h3>
+
+              <div class="row">
+                <div class="col-xs-12">
+                <div style="display: inline-block">
+                  <%= form_for @event, url: faker_index_path(project_id: @project.id) do |f| %>
+                    <input type="hidden" name="event[actor][name]" value="<%= current_user_name %>" />
+                    <input type="hidden" name="event[verb]" value="add" />
+                    <input type="hidden" name="event[object][name]" value="Grumpy Cat" />
+                    <input type="hidden" name="event[target][name]" value="Favorite Cats" />
+                    <button class="btn btn-primary">Grumpy Cat</button>
+                  <% end %>
+                </div>
+
+                <div style="display: inline-block">
+                  <%= form_for @event, url: faker_index_path(project_id: @project.id) do |f| %>
+                    <input type="hidden" name="event[actor][name]" value="<%= current_user_name %>" />
+                    <input type="hidden" name="event[verb]" value="add" />
+                    <input type="hidden" name="event[object][name]" value="Maru" />
+                    <input type="hidden" name="event[target][name]" value="Favorite Cats" />
+                    <button class="btn btn-primary">Maru</button>
+                  <% end %>
+                </div>
+
+                <div style="display: inline-block">
+                  <%= form_for @event, url: faker_index_path(project_id: @project.id) do |f| %>
+                    <input type="hidden" name="event[actor][name]" value="<%= current_user_name %>" />
+                    <input type="hidden" name="event[verb]" value="add" />
+                    <input type="hidden" name="event[object][name]" value="Snoopy the Cat" />
+                    <input type="hidden" name="event[target][name]" value="Favorite Cats" />
+                    <button class="btn btn-primary">Snoopy the Cat</button>
+                  <% end %>
+                </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
