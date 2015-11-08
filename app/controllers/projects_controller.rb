@@ -22,13 +22,13 @@ class ProjectsController < ApplicationController
     if current_user.memberships.create(project: project)
       redirect_to project_path(project)
     else
-      flash[:error] = project.errors.full_messages
+      flash[:alert] = project.errors.full_messages
     end
   end
 
   def reset_token
     if params[:project_id].to_i == Project.demo.id
-      flash[:error] = "Sorry, you cannot reset the token for the demo project"
+      flash[:alert] = "Sorry, you cannot reset the token for the demo project"
       redirect_to project_path(Project.demo)
     elsif !user_signed_in?
       authenticate_user!
@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
       if project.reset_token!
         flash[:notice] = "Project '#{project.name}' token reset"
       else
-        flash[:error] = "Could not reset token for project '#{project.name}'"
+        flash[:alert] = "Could not reset token for project '#{project.name}'"
       end
       redirect_to project_path(project)
     end
