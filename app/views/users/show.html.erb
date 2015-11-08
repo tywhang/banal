@@ -1,14 +1,24 @@
-<h3>Welcome, <%= @user.name %></h3>
+<div class="home-container">
+  <div class="home-inner-container">
+    <div class="col-sm-6 user-info-container">
+      <img class="icon" src="<%= image_url('smile.png') %>" alt="">
+      <h3>Welcome <%= @user.name %></h3>
+    </div>
 
-<h5>Your projects:</h5>
-<ul>
-  <% @user.projects.each do |project| %>
-  <li>
-    <a href="<%= project_path(project) %>">
-      <%= project.name %>
-    </a>
-  </li>
-  <% end %>
-</ul>
-
-<a href="<%= new_project_path %>">Add a project</a>
+    <div class="col-sm-6 projects-container">
+      <h3>Your projects</h3>
+      <ul>
+        <% @user.projects.each do |project| %>
+        <li>
+          <a href="<%= project_path(project) %>">
+            <%= project.name %>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+      <div class="button-container">
+        <a class="btn btn-primary" href="<%= new_project_path %>">Add a project</a>
+      </div>
+    </div>
+  </div>
+</div>
