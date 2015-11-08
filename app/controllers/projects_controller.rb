@@ -17,10 +17,6 @@ class ProjectsController < ApplicationController
     @search = Search.new((params.slice(:q) || {}).merge(project: @project))
   end
 
-  def new
-    @project = Project.new
-  end
-
   def create
     project = Project.new(create_params)
     if current_user.memberships.create(project: project)
