@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :token, presence: true, length: { minimum: 32 }, uniqueness: true
 
-  before_validation :set_token_on_create
+  before_validation :set_token, if: :new_record?
 
   def self.demo
     Project.find_by!(name: DEMO_NAME)
@@ -24,9 +24,15 @@ class Project < ActiveRecord::Base
     )
   end
 
+  def reset_token!
+    self.token = nil
+    set_token
+    save
+  end
+
   private
 
-  def set_token_on_create
-    self.token = SecureRandom.urlsafe_base64(32).downcase if new_record?
+  def set_token
+    self.token = SecureRandom.urlsafe_base64(32).downcase
   end
 end

@@ -1,5 +1,9 @@
 <div class="events-outer-container background">
   <div class="panel panel-default events-container">
+    <button type="button" class="settings-button" data-toggle="modal" data-target="#settingsModal">
+      <img src="<%= image_url('cog.png') %>" alt="" class="icon">
+    </button>
+
     <div class="panel-heading"><h4>Recent Events for: <%= @project.name %></h4></div>
 
     <div class="panel-body">
@@ -78,14 +82,14 @@
         </div>
       <% end %>
     </div>
-    <button type="button" class="help-button" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="help-button" data-toggle="modal" data-target="#helpModal">
       <img src="<%= image_url('help.png') %>" alt="" class="icon">
     </button>
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- Help Modal -->
 <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -97,6 +101,32 @@
         Feature 1:
         Feature 2:
         Feature 3:
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Token for <%= @project.name %></h4>
+      </div>
+      <div class="modal-body">
+        Token: <code><%= @project.token %></code>
+        <p class="text-muted">This token is used to add events to your project. Please keep this token secret!</p>
+        <div>
+          <%= button_to('Regenerate Token',
+                        project_reset_token_path(@project),
+                        method: :post,
+                        data: { confirm: 'Are you sure? This will invalidate your existing token.' },
+                        class: 'btn btn-danger') %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

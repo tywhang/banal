@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   get 'home', to: 'users#show'
-  resources :projects, only: [:show, :new, :create]
+  resources :projects, only: [:show, :new, :create] do
+    post 'reset_token'
+  end
 
   namespace 'api' do
     put :events, to: 'events#create'
