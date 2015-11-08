@@ -22,6 +22,10 @@ describe Search do
     it 'filters target by name' do
       expect(search_for(q: "name:'Favorites'")).to eq([patty, jenny, mark, tom])
     end
+
+    it 'filters by other fields' do
+      expect(search_for(q: "fav_title:'Toms Favorites'")).to eq([tom])
+    end
   end
 
   def search_for(attrs)
@@ -39,7 +43,8 @@ describe Search do
       actor: {name: actor_name, id: @id1},
       verb: verb,
       object: {name: object_name, id: @id2},
-      target: {name: target_name, id: @id3, actor_id: @id1},
+      target: {name: target_name, id: @id3, actor_id: @id1,
+               fav_title: "#{actor_name}s Favorites"},
       project: stub_model(Project)
     )
   end
