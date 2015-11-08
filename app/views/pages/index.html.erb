@@ -101,16 +101,18 @@
       <div class="works-step-description">
         <h5>So when Bobby uploads 'Foo.jpg' to his profile, you would run:</h5>
         <div class="code-snippet">
-          <code>$.post(</code><br />
-          <code>&nbsp;&nbsp;url: "http://simple-track.r15.railsrumble.com/events",</code><br />
+          <code>$.ajax("http://simple-track.r15.railsrumble.com/api/events", {</code><br />
+          <code>&nbsp;&nbsp;method: "PUT",</code></br />
           <code>&nbsp;&nbsp;data: {</code><br />
-          <code>&nbsp;&nbsp;&nbsp;&nbsp;actor: "Bobby",</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;actor: '{ "name": "Bobby" }',</code><br />
           <code>&nbsp;&nbsp;&nbsp;&nbsp;verb: "uploaded",</code><br />
-          <code>&nbsp;&nbsp;&nbsp;&nbsp;object: "Foo.jpg",</code><br />
-          <code>&nbsp;&nbsp;&nbsp;&nbsp;target: "profile",</code><br />
-          <code>&nbsp;&nbsp;&nbsp;&nbsp;project_id: { your project's unique ID }</code><br />
-          <code>&nbsp;&nbsp;}</code><br />
-          <code>)</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;object: '{ "name": "Foo.jpg", "type": "image" }',</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;target: '{ "name": "profile" }',</code><br />
+          <code>&nbsp;&nbsp;},</code><br />
+          <code>&nbsp;&nbsp;headers: {</code><br />
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;"X-AUTHTOKEN": "YOUR_TOKEN"</code></br>
+          <code>&nbsp;&nbsp;}</code></br>
+          <code>})</code><br />
         </div>
       </div>
     </div>
