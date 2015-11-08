@@ -15,7 +15,7 @@ class Search
   def full_query
     {}.tap do |query|
       if q.present?
-        query[:filter] = {query: {query_string: {query: q}}}
+        query[:query] = {query_string: {query: q}}
       else
         query[:query] = {match_all: {}}
       end
