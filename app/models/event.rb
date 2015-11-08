@@ -1,4 +1,8 @@
 class Event < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  index_name [Rails.env, model_name.collection.gsub(/\//, '-')].join('_')
+
   belongs_to :project
 
   validates :actor, presence: true

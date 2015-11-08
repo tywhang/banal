@@ -23,10 +23,20 @@ group :development, :test do
 
   # generate fake data in ex. seeds
   gem 'faker', github: 'stympy/faker' # need HEAD for Book.genre
+
+  # Pry hooks into rspec much better, specifically it uses the same activerecord
+  # transaction, so you can see what's actually going on.
+  gem 'pry'
 end
 
 group :test do
   gem 'rspec-activemodel-mocks'
+
+  # provides testing utilities for starting/stopping elasticsearch
+  gem 'elasticsearch-extensions'
 end
+
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
 
 gem 'rails_12factor', group: :production
