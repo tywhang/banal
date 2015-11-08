@@ -4,7 +4,7 @@
 
     <div class="panel-body">
       <div id="event-viewport">
-        <table class="table">
+        <table class="table table-hover events-table">
           <thead>
             <th>Time</th>
             <th>Actor</th>
@@ -15,15 +15,51 @@
 
           <tbody>
             <% @search.results.each do |event| %>
-            <tr>
+            <tr class="json-row">
               <td>
                 <p><%= event.created_at.strftime("%_m/%d/%Y") %></p>
                 <p><%= event.created_at.strftime("%l:%M:%S %p (%Z)") %></p>
               </td>
-              <td><%= event.actor["name"] %></td>
+              <td class="json-row">
+                <span class="summary"><%= event.actor["name"] %></span>
+                <div class="details">
+                  <table class="table table-condensed">
+                    <% event.actor.each do |(key, value)| %>
+                    <tr>
+                      <td><strong><%= key %></strong></td>
+                      <td><%= value %></td>
+                    </tr>
+                    <% end %>
+                  </table>
+                </div>
+              </td>
               <td><%= event.verb %></td>
-              <td><%= event.object["name"] %></td>
-              <td><%= event.target && event.target["name"] %></td>
+              <td class="json-cell">
+                <span class="summary"><%= event.object["name"] %></span>
+                <div class="details">
+                  <table class="table table-condensed">
+                    <% event.object.each do |(key, value)| %>
+                    <tr>
+                      <td><strong><%= key %></strong></td>
+                      <td><%= value %></td>
+                    </tr>
+                    <% end %>
+                  </table>
+                </div>
+              </td>
+              <td class="json-cell">
+                <span class="summary"><%= event.target && event.target["name"] %></span>
+                <div class="details">
+                  <table class="table table-condensed">
+                    <% event.target.try(:each) do |(key, value)| %>
+                    <tr>
+                      <td><strong><%= key %></strong></td>
+                      <td><%= value %></td>
+                    </tr>
+                    <% end %>
+                  </table>
+                </div>
+              </td>
             </tr>
             <% end %>
           </tbody>
