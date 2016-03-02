@@ -1,7 +1,7 @@
 = Banal
 === Behavior analytics that behave
 
-Link to project's homepage : http://blooming-gorge-9582.herokuapp.com/
+Link to project's homepage: http://blooming-gorge-9582.herokuapp.com/
 
 ---
 Banal is an analytics tool that solves the most common issue when it comes to analyzing user data:
@@ -11,7 +11,7 @@ Banal is an analytics tool that solves the most common issue when it comes to an
 ---
 
 How Banal solves the issue.
-* Uses the [Activity Stream Specification](https://www.w3.org/wiki/Activity_Streams)
+* Uses the Activity Stream Specification. Docs: https://www.w3.org/wiki/Activity_Streams
 * Easy to use API
 * Detailed tables for segmentation
 
@@ -21,12 +21,15 @@ How Banal solves the issue.
 
 In summary the spec structure is:
 
-> [Actor] [verbs] an [object], sometimes to a [target]
+```
+  [Actor] [verbs] an [object], sometimes to a [target]
+```
 
 Examples:
-
-1. [Jack] [added] a [photo] to his [profile]
-2. [Julie] [viewed] her [messages]
+```
+  1. [Jack] [added] a [photo] to his [profile]
+  2. [Julie] [viewed] her [messages]
+```
 ---
 
 == Usage
@@ -35,19 +38,19 @@ After you made an account you can begin to make API calls to our server.
 
 If Jack added a photo to his profile, the call would be:
 
-```javascript
+```
  $.ajax("http://simple-track.r15.railsrumble.com/api/events", {
-  method: "PUT",
-  data: {
-    actor: '{ "name": "Jack" }',
-    verb: "uploaded",
-    object: '{ "name": "Foo.jpg", "type": "image" }',
-    target: '{ "name": "profile" }',
-  },
-  headers: {
-    "X-AUTHTOKEN": "YOUR_TOKEN"
-  }
-})
+   method: "PUT",
+     data: {
+     actor: '{ "name": "Jack" }',
+     verb: "uploaded",
+     object: '{ "name": "Foo.jpg", "type": "image" }',
+     target: '{ "name": "profile" }',
+   },
+   headers: {
+     "X-AUTHTOKEN": "YOUR_TOKEN"
+   }
+ });
 ```
 
 === Afterwards, just log in to see your data on the user interface!
