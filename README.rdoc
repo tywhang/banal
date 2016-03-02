@@ -1,12 +1,12 @@
-# Banal
-### Behavior analytics that behave
+= Banal
+=== Behavior analytics that behave
 
 [Click here](http://blooming-gorge-9582.herokuapp.com/) to see the homepage
 
 ---
 Banal is an analytics tool that solves the most common issue when it comes to analyzing user data:
 
-### A lack of structure...
+=== A lack of structure...
 
 ---
 
@@ -17,7 +17,7 @@ How Banal solves the issue.
 
 ---
 
-### What is the Activity Stream Specification?
+=== What is the Activity Stream Specification?
 
 In summary the spec structure is:
 ```
@@ -29,7 +29,7 @@ Examples:
 2. [Julie] [viewed] her [messages]
 ---
 
-### Usage
+== Usage
 
 After you made an account you can begin to make API calls to our server.
 
@@ -50,9 +50,10 @@ $.ajax("http://simple-track.r15.railsrumble.com/api/events", {
 })
 ```
 
-### Afterwards, just log in to see your data on the user interface!
+=== Afterwards, just log in to see your data on the user interface!
 
 ---
+==== Demo
 
 [Click here to see the Demo!](http://blooming-gorge-9582.herokuapp.com/projects/1)
 
