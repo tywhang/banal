@@ -1,28 +1,59 @@
-== README
+# Banal
+### Behavior analytics that behave
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Click here](http://blooming-gorge-9582.herokuapp.com/) to see the homepage
 
-Things you may want to cover:
+---
+Banal is an analytics tool that solves the most common issue when it comes to analyzing user data:
 
-* Ruby version
+### A lack of structure...
 
-* System dependencies
+---
 
-* Configuration
+How Banal solves the issue.
+* Uses the [Activity Stream Specification](https://www.w3.org/wiki/Activity_Streams)
+* Easy to use API
+* Detailed tables for segmentation
 
-* Database creation
+---
 
-* Database initialization
+### What is the Activity Stream Specification?
 
-* How to run the test suite
+In summary the spec structure is:
+```
+[Actor] [verbs] an [object], sometimes to a [target]
+```
+Examples:
 
-* Services (job queues, cache servers, search engines, etc.)
+1. [Jack] [added] a [photo] to his [profile]
+2. [Julie] [viewed] her [messages]
+---
 
-* Deployment instructions
+### Usage
 
-* ...
+After you made an account you can begin to make API calls to our server.
 
+If Jack added a photo to his profile, the call would be:
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```
+$.ajax("http://simple-track.r15.railsrumble.com/api/events", {
+  method: "PUT",
+  data: {
+    actor: '{ "name": "Jack" }',
+    verb: "uploaded",
+    object: '{ "name": "Foo.jpg", "type": "image" }',
+    target: '{ "name": "profile" }',
+  },
+  headers: {
+    "X-AUTHTOKEN": "YOUR_TOKEN"
+  }
+})
+```
+
+### Afterwards, just log in to see your data on the user interface!
+
+---
+
+[Click here to see the Demo!](http://blooming-gorge-9582.herokuapp.com/projects/1)
+
+---
