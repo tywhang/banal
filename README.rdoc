@@ -1,6 +1,9 @@
 = Banal
 === Behavior analytics that behave
 
+=== Winner of the 2015 Rails Rumble Best Saas Award
+==== https://railsrumble.com/entries/187-banal
+
 Link to project's homepage: http://blooming-gorge-9582.herokuapp.com/
 
 ---
